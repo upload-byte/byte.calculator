@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Byte Calculator</title>
+  
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    .integer {
+      border-radius: 5px;
+      background-color: rgb(0, 128, 0);
+      color: rgb(255, 255, 255);
+    }
+    .integer:hover {
+      background-color: rgb(0, 100, 0);
+    }
+    .integer:active {
+      background-color: rgb(0, 75, 0);
+    }
+    button {
+      cursor: pointer;
+    }
+    .external {
+      border-radius: 5px;
+      background-color: rgb(75, 75, 75);
+      color: rgb(255, 255, 255);
+    }
+    .external:hover {
+      background-color: rgb(50, 50, 50);
+    }
+    .external:active {
+      background-color: rgb(0, 0, 0);
+    }
+    .operator {
+      width: 25px;
+      height: 20px;
+      border-radius: 5px;
+      background-color: rgb(255, 165, 0);
+      color: rgb(255, 255, 255);
+    }
+    .operator:hover {
+      background-color: rgb(200, 135, 0);
+    }
+    .operator:active {
+      background-color: rgb(150, 90, 0);
+    }
+  </style>
+</head>
+<body>
+  <input style="width: 125px;" id="output" readonly>
+  <br>
+  <button class="integer" onclick="add1()" id="1">1</button>  
+  <button class="integer" onclick="add2()" id="2">2</button>  
+  <button class="integer" onclick="add3()" id="3">3</button>  
+  <button class="operator" onclick="plus()">+</button> 
+  <button class="external" onclick="pi1()">π 1</button>
+  <br>
+  <button class="integer" onclick="add4()" id="4">4</button> 
+  <button class="integer" onclick="add5()" id="5">5</button> 
+  <button class="integer" onclick="add6()" id="6">6</button>  
+  <button class="operator" onclick="minus()">-</button> 
+  <button class="external" onclick="pi2()">π 2</button>
+  <br>
+  <button class="integer" onclick="add7()" id="7">7</button>  
+  <button class="integer" onclick="add8()" id="8">8</button>  
+  <button class="integer" onclick="add9()" id="9">9</button>  
+  <button class="operator" onclick="multiply()">x</button>  
+  <button class="external" onclick="pi3()">π 3</button>
+  <br>
+  <button class="integer" onclick="add0()" id="0">0</button>  
+  <button class="external" onclick="clearOutput()">C</button> 
+  <button class="external" onclick="equals()">=</button>  
+  <button class="operator" onclick="divide()">&divide;</button> 
+  <button class="external" onclick="showInstructions()">&#1143124;</button>
+  
+  <script>
+    const output = document.getElementById('output');
+
+    function append(val) {
+      output.value += val;
+    }
+
+    function add0() { append('0'); }
+    function add1() { append('1'); }
+    function add2() { append('2'); }
+    function add3() { append('3'); }
+    function add4() { append('4'); }
+    function add5() { append('5'); }
+    function add6() { append('6'); }
+    function add7() { append('7'); }
+    function add8() { append('8'); }
+    function add9() { append('9'); }
+
+    // Updated decimal precision
+    function pi1() { append(Math.PI.toFixed(2)); }  // 3.14
+    function pi2() { append(Math.PI.toFixed(5)); }  // 3.14159
+    function pi3() { append(Math.PI.toFixed(10)); } // 3.1415926536
+
+    function plus() { append('+'); }
+    function minus() { append('-'); }
+    function multiply() { append('*'); }
+    function divide() { append('/'); }
+
+    function clearOutput() {
+      output.value = '';
+    }
+
+    function equals() {
+      if (!output.value) return;
+      try {
+        output.value = Function('"use strict"; return (' + output.value + ')')();
+      } catch (e) {
+        output.value = 'Error';
+      }
+    }
+
+    function showInstructions() {
+      alert("INSTRUCTIONS:\n\n1. Type an Integer (or π)\n2. Select an operator\n3. Type an integer (or π)\n4. Select = to see the answer");
+    }
+  </script>
+</body>
+</html>
